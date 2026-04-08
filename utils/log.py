@@ -20,6 +20,7 @@ class Logger:
 
     # 设置logger对象
     def get_logger(self):
+        os.makedirs(self.log_path, exist_ok=True)
         path = os.path.join(self.log_path, self.log_name + '.log')
         log_handler = logging.FileHandler(path, mode='a', encoding='utf-8')
         log_handler.setFormatter(self.fmt)
