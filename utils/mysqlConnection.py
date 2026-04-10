@@ -1,7 +1,7 @@
 import pymysql
 import sqlalchemy
 
-
+#数据库引擎模块
 class ConnectMysql:
     def __init__(self):
         self.host = 'localhost'
