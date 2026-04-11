@@ -3,6 +3,8 @@ from utils.mysqlConnection import ConnectMysql
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+from pyecharts import options as opts
+from pyecharts.charts import Funnel
 
 plt.rcParams['font.sans-serif'] = ['SimHei']
 """
@@ -54,7 +56,7 @@ def csv_to_sql():
 # user_id product_id category_id behavior timestamp datetime date month hour
 # 用户ID   商品ID     商品类目ID     用户行为  时间戳
 
-def user_activity():
+def basic_analysis():
     engine = ConnectMysql().get_engine()
     data = pd.read_sql('userbehavior', engine)
     data.info()
@@ -91,6 +93,27 @@ def user_activity():
     plt.show()
 
 
+def other_analysis():
+    engine = ConnectMysql().get_engine()
+    data = pd.read_sql('userbehavior', engine)
+
+    counts = data['behavior'].value_counts()
+
+    pv_cnt = int(counts.get('pv', 0))
+    buy_cnt = int(counts.get('buy', 0))
+    cart_cnt = int(counts.get('cart', 0))
+    fav_cnt = int(counts.get('fav', 0))
+
+    funnel = (
+        Funnel()
+        .add("转化漏斗",
+             [list(z) for z in zip(['PV', '收藏', '加购', '购买'], [pv_cnt, fav_cnt, cart_cnt, buy_cnt])])
+        .set_global_opts(title_opts=opts.TitleOpts(title="转化漏斗分析"))
+    )
+    funnel.render('conversion_funnel.html')
+
+
 if __name__ == '__main__':
     # csv_to_sql()
-    user_activity()
+    # basic_analysis()
+    other_analysis()
