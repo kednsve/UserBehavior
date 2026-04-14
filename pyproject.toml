@@ -1,0 +1,17 @@
+[project]
+name = "userbehavior"
+version = "0.1.0"
+description = "UserBehavior 某宝用户行为分析————阿里天池数据集"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "numpy>=2.2.6",
+    "pandas>=2.3.3",
+    "pyecharts>=2.1.0",
+    "seaborn>=0.13.2",
+]
+
+[[tool.uv.index]]
+url = "https://pypi.tuna.tsinghua.edu.cn/simple"
+default = true
