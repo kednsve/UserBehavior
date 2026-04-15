@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 from pyecharts import options as opts
-from pyecharts.charts import Funnel, Pie
+from pyecharts.charts import Funnel, Pie, Bar
 
 from utils.mysqlConnection import ConnectMysql
 
@@ -11,7 +11,7 @@ plt.rcParams["font.sans-serif"] = ["SimHei"]
 1.用户流量分析：PV 用户活跃时段
 2.转化漏斗分析：浏览->购买
 3.商品分析：热门商品
-
+4.RFM分析
 """
 
 
@@ -29,6 +29,8 @@ def csv_to_sql():
     """
     data = pd.read_csv("../data/UserBehavior.csv")
     data = data.sample(n=1000000, random_state=22)
+    # 修改id列为str
+    data = data.astype({"user_id": str, "product_id": str, "category_id": str})
     # 添加列：datetime yyyy-MM-dd HH:mm:ss
     data["datetime"] = pd.to_datetime(data["timestamp"], unit="s")
     # 添加列：date     yyyy-MM-dd
@@ -55,7 +57,7 @@ def csv_to_sql():
 
 # 处理后的数据
 # user_id product_id category_id behavior timestamp datetime date month hour
-# 用户ID   商品ID     商品类目ID     用户行为  时间戳
+# 用户ID   商品ID     商品类目ID     用户行为  时间戳      日期      日期  月   时
 
 
 def basic_analysis():
@@ -167,8 +169,48 @@ def hot_analysis():
     plt.show()
 
 
+def rfm_analysis():
+    """
+    数据中不含金额，所以只分析RF
+    :return:
+    """
+    engine = ConnectMysql().get_engine()
+    data = pd.read_sql("userbehavior", engine)
+    rfm = (
+        data[data["behavior"] == "buy"]
+        .groupby(["user_id"])
+        .agg({"datetime": "max", "date": "count"})
+        .reset_index()
+    )
+    del data
+    rfm.columns = ["user_id", "R", "F"]
+    desc = rfm["R"].describe()
+    r_bin = [desc["min"], desc["50%"], desc["75%"], desc["max"]]
+    f_bin = [1, 2, 3, 4]
+    labels = [1, 2, 3]
+    rfm["R_score"] = pd.cut(rfm["R"], bins=r_bin, labels=labels, include_lowest=True)
+    rfm["F_score"] = pd.cut(rfm["F"], bins=f_bin, labels=labels, include_lowest=True)
+    rfm.info()
+    rfm["RF"] = rfm["R_score"].astype(str) + rfm["F_score"].astype(str)
+    print(rfm.head(5))
+    rfm = rfm.groupby("RF").agg(cnt=("user_id", "count")).reset_index()
+    rfm.info()
+    print(rfm.head(5).to_string())
+    bar = Bar()
+    bar.add_xaxis(xaxis_data=rfm["RF"].tolist())
+    bar.add_yaxis(series_name="", y_axis=rfm["cnt"].tolist())
+    bar.set_global_opts(
+        title_opts=opts.TitleOpts(title="RF分析柱状图"),
+        xaxis_opts=opts.AxisOpts(type_="category", name="RF"),
+        yaxis_opts=opts.AxisOpts(name="cnt")
+    )
+    bar.set_series_opts(label_opts=opts.LabelOpts(position="top"))
+    bar.render("../data/RF.html")
+
+
 if __name__ == "__main__":
     # csv_to_sql()
     # basic_analysis()
     # funnel_behavior()
-    hot_analysis()
+    # hot_analysis()
+    rfm_analysis()
