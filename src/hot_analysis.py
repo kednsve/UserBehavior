@@ -1,10 +1,12 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
+from src.config import DA_CONFIG
 from utils import ConnectMysql
 
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+
 
 def hot_analysis():
     engine = ConnectMysql().get_engine()
@@ -48,5 +50,7 @@ def hot_analysis():
     plt.title("hot_buy")
     plt.suptitle("热门商品Top10")
     plt.tight_layout()
-    plt.savefig("../data/热门商品TOP10.jpg")
-    plt.show()
+    fig = plt.gcf()
+    plt.savefig(DA_CONFIG["output_dir"] / "热门商品TOP10.jpg")
+    plt.close()
+    return fig

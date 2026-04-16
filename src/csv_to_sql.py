@@ -1,5 +1,6 @@
 import pandas as pd
 
+from src.config import DA_CONFIG
 from utils import ConnectMysql
 
 
@@ -13,7 +14,10 @@ def csv_to_sql():
     data["datetime"] = pd.to_datetime(data["timestamp"], unit="s")
     data["date"] = data["datetime"].dt.date
     data["date"] = pd.to_datetime(data["date"])
-    data = data[(data["date"] >= "2017-11-25") & (data["date"] <= "2017-12-03")]
+    data = data[
+        (data["date"] >= DA_CONFIG["date"]["start"])
+        & (data["date"] <= DA_CONFIG["date"]["end"])
+    ]
     data["month"] = data["datetime"].dt.month
     data["hour"] = data["datetime"].dt.hour
     data.info()

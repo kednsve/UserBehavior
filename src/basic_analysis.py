@@ -2,10 +2,12 @@ import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
 
+from src.config import DA_CONFIG
 from utils import ConnectMysql
 
 plt.rcParams["font.sans-serif"] = ["SimHei"]
 plt.rcParams["axes.unicode_minus"] = False
+
 
 def basic_analysis():
     engine = ConnectMysql().get_engine()
@@ -38,5 +40,7 @@ def basic_analysis():
     plt.xticks(rotation=15)
     plt.title("购买转化率")
     plt.tight_layout()
-    plt.savefig("../data/流量分析.jpg")
-    plt.show()
+    fig = plt.gcf()
+    plt.savefig(DA_CONFIG["output_dir"] / "流量分析.jpg")
+    plt.close()
+    return fig

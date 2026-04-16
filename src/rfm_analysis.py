@@ -2,6 +2,7 @@ import pandas as pd
 from pyecharts import options as opts
 from pyecharts.charts import Bar
 
+from src.config import DA_CONFIG
 from utils import ConnectMysql
 
 
@@ -24,7 +25,10 @@ def rfm_analysis():
     r_bin = [desc["min"], desc["50%"], desc["75%"], desc["max"]]
     f_bin = [1, 2, 3, 4]
     labels = [1, 2, 3]
-    rfm["R_score"] = pd.cut(rfm["R"], bins=r_bin, labels=labels, include_lowest=True)
+    labels_reverse = [3, 2, 1]
+    rfm["R_score"] = pd.cut(
+        rfm["R"], bins=r_bin, labels=labels_reverse, include_lowest=True
+    )
     rfm["F_score"] = pd.cut(rfm["F"], bins=f_bin, labels=labels, include_lowest=True)
     rfm.info()
     rfm["RF"] = rfm["R_score"].astype(str) + rfm["F_score"].astype(str)
@@ -41,4 +45,5 @@ def rfm_analysis():
         yaxis_opts=opts.AxisOpts(name="cnt"),
     )
     bar.set_series_opts(label_opts=opts.LabelOpts(position="top"))
-    bar.render("../data/RF.html")
+    bar.render(DA_CONFIG["output_dir"] / "RF.html")
+    return bar
