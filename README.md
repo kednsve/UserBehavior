@@ -47,6 +47,7 @@
 
 ## 项目结构
 
+```
 UserBehavior/
 ├── streamlitapp.py # 主应用入口
 ├── data_analysis.py # 数据分析主函数
@@ -58,6 +59,7 @@ UserBehavior/
 │ └── config.py # 配置文件
 ├── utils/ # 工具类
 └── data/ # 数据目录及Matplotlib与Pyecharts输出目录
+```
 
 ## 运行方式
 
