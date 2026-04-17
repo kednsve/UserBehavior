@@ -15,7 +15,7 @@ from src import *
 
 if __name__ == "__main__":
     # 从100M数据中抽取1M，处理后存入数据库中
-    # csv_to_sql()
+    csv_to_sql()
     # 处理后的数据
     # user_id product_id category_id behavior timestamp datetime date month hour
     # 用户ID   商品ID     商品类目ID     用户行为  时间戳      日期      日期  月   时
