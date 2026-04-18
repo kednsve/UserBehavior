@@ -52,12 +52,14 @@ UserBehavior/
 ├── streamlitapp.py # 主应用入口
 ├── data_analysis.py # 数据分析主函数
 ├── src/ # 源代码目录
+│ ├── csv_to_sql.py # 数据预处理模块
 │ ├── analysis_funnel_pie.py # 漏斗图和饼图分析
 │ ├── basic_analysis.py # 流量分析
 │ ├── hot_analysis.py # 热门商品分析
 │ ├── rfm_analysis.py # RFM分析
 │ └── config.py # 配置文件
 ├── utils/ # 工具类
+│ └── mysqlConnection.py # 数据库连接模块
 └── data/ # 数据目录及Matplotlib与Pyecharts输出目录
 ```
 
@@ -67,7 +69,8 @@ UserBehavior/
     - 使用uv sync
     - 使用pip install -r requirement.txt
     - 酌情使用镜像源
-2. 运行streamlit
+2. 下载[数据集](https://tianchi.aliyun.com/dataset/649)
+3. 运行streamlit
     - 使用streamlit run streamlitapp.py
 
 ## 说明
