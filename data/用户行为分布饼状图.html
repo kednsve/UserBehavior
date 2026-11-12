@@ -8,11 +8,11 @@
     
 </head>
 <body >
-    <div id="a1e1c0db34cd46b7bba2ec925c25aef3" class="chart-container" style="width:900px; height:500px; "></div>
+    <div id="ca31acb02cce4357abffcd2f88dc9fca" class="chart-container" style="width:900px; height:500px; "></div>
     <script>
-        var chart_a1e1c0db34cd46b7bba2ec925c25aef3 = echarts.init(
-            document.getElementById('a1e1c0db34cd46b7bba2ec925c25aef3'), 'white', {renderer: 'canvas', locale: 'ZH'});
-        var option_a1e1c0db34cd46b7bba2ec925c25aef3 = {
+        var chart_ca31acb02cce4357abffcd2f88dc9fca = echarts.init(
+            document.getElementById('ca31acb02cce4357abffcd2f88dc9fca'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_ca31acb02cce4357abffcd2f88dc9fca = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -27,7 +27,7 @@
     "series": [
         {
             "type": "pie",
-            "name": "\u7528\u6237\u884c\u4e3a\u5206\u5e03",
+            "name": "\u884c\u4e3a\u5206\u5e03",
             "colorBy": "data",
             "legendHoverLink": true,
             "selectedMode": false,
@@ -53,20 +53,20 @@
             },
             "data": [
                 {
-                    "name": "PV",
-                    "value": 490316
+                    "name": "\u6d4f\u89c8",
+                    "value": 19704
                 },
                 {
                     "name": "\u6536\u85cf",
-                    "value": 25687
+                    "value": 7741
                 },
                 {
                     "name": "\u52a0\u8d2d",
-                    "value": 50850
+                    "value": 14795
                 },
                 {
                     "name": "\u8d2d\u4e70",
-                    "value": 19636
+                    "value": 13326
                 }
             ],
             "radius": [
@@ -80,6 +80,7 @@
             "label": {
                 "show": true,
                 "margin": 8,
+                "formatter": "{b}: {c} \u4eba\uff08{d}%\uff09",
                 "richInheritPlainLabel": true,
                 "valueAnimation": false
             },
@@ -91,19 +92,27 @@
                 "smooth": false,
                 "minTurnAngle": 90,
                 "maxSurfaceAngle": 90
+            },
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
             }
         }
     ],
     "legend": [
         {
             "data": [
-                "PV",
+                "\u6d4f\u89c8",
                 "\u6536\u85cf",
                 "\u52a0\u8d2d",
                 "\u8d2d\u4e70"
             ],
             "selected": {},
             "show": true,
+            "bottom": "0%",
+            "orient": "horizontal",
             "padding": 5,
             "itemGap": 10,
             "itemWidth": 25,
@@ -152,7 +161,7 @@
     "title": [
         {
             "show": true,
-            "text": "\u7528\u6237\u884c\u4e3a\u5206\u5e03",
+            "text": "\u7528\u6237\u884c\u4e3a\u5206\u5e03\uff08\u53bb\u91cd\u7528\u6237\u6570\uff09",
             "target": "blank",
             "subtarget": "blank",
             "padding": 5,
@@ -163,7 +172,7 @@
         }
     ]
 };
-        chart_a1e1c0db34cd46b7bba2ec925c25aef3.setOption(option_a1e1c0db34cd46b7bba2ec925c25aef3);
+        chart_ca31acb02cce4357abffcd2f88dc9fca.setOption(option_ca31acb02cce4357abffcd2f88dc9fca);
     </script>
 </body>
 </html>

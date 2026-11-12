@@ -8,11 +8,11 @@
     
 </head>
 <body >
-    <div id="e53dfe94d4c04f58b95afb1a78379eec" class="chart-container" style="width:900px; height:500px; "></div>
+    <div id="32542d5bc86945dead365318eccc12c4" class="chart-container" style="width:900px; height:500px; "></div>
     <script>
-        var chart_e53dfe94d4c04f58b95afb1a78379eec = echarts.init(
-            document.getElementById('e53dfe94d4c04f58b95afb1a78379eec'), 'white', {renderer: 'canvas', locale: 'ZH'});
-        var option_e53dfe94d4c04f58b95afb1a78379eec = {
+        var chart_32542d5bc86945dead365318eccc12c4 = echarts.init(
+            document.getElementById('32542d5bc86945dead365318eccc12c4'), 'white', {renderer: 'canvas', locale: 'ZH'});
+        var option_32542d5bc86945dead365318eccc12c4 = {
     "animation": true,
     "animationThreshold": 2000,
     "animationDuration": 1000,
@@ -27,23 +27,19 @@
     "series": [
         {
             "type": "funnel",
-            "name": "\u8f6c\u5316\u6f0f\u6597",
+            "name": "\u7528\u6237\u8f6c\u5316",
             "data": [
                 {
-                    "name": "PV",
-                    "value": 490316
+                    "name": "\u6d4f\u89c8 19,704 \u4eba\uff08100.0%\uff09",
+                    "value": 19704
                 },
                 {
-                    "name": "\u6536\u85cf",
-                    "value": 25687
+                    "name": "\u610f\u5411\uff08\u6536\u85cf\u6216\u52a0\u8d2d\uff09 17,247 \u4eba\uff0887.5%\uff09",
+                    "value": 17247
                 },
                 {
-                    "name": "\u52a0\u8d2d",
-                    "value": 50850
-                },
-                {
-                    "name": "\u8d2d\u4e70",
-                    "value": 19636
+                    "name": "\u8d2d\u4e70 13,326 \u4eba\uff0867.6%\uff09",
+                    "value": 13326
                 }
             ],
             "min": 0,
@@ -51,31 +47,39 @@
             "minSize": "0%",
             "maxSize": "100%",
             "orient": "vertical",
-            "sort": "descending",
-            "gap": 0,
+            "sort": "none",
+            "gap": 2,
             "legendHoverLink": true,
             "funnelAlign": "center",
             "label": {
                 "show": true,
+                "position": "inside",
+                "color": "#fff",
                 "margin": 8,
+                "formatter": "{b}",
                 "richInheritPlainLabel": true,
                 "valueAnimation": false
             },
             "selectedMode": false,
             "zlevel": 0,
-            "z": 2
+            "z": 2,
+            "rippleEffect": {
+                "show": true,
+                "brushType": "stroke",
+                "scale": 2.5,
+                "period": 4
+            }
         }
     ],
     "legend": [
         {
             "data": [
-                "\u6536\u85cf",
-                "PV",
-                "\u8d2d\u4e70",
-                "\u52a0\u8d2d"
+                "\u8d2d\u4e70 13,326 \u4eba\uff0867.6%\uff09",
+                "\u610f\u5411\uff08\u6536\u85cf\u6216\u52a0\u8d2d\uff09 17,247 \u4eba\uff0887.5%\uff09",
+                "\u6d4f\u89c8 19,704 \u4eba\uff08100.0%\uff09"
             ],
             "selected": {},
-            "show": true,
+            "show": false,
             "padding": 5,
             "itemGap": 10,
             "itemWidth": 25,
@@ -124,7 +128,7 @@
     "title": [
         {
             "show": true,
-            "text": "\u8f6c\u5316\u6f0f\u6597\u5206\u6790",
+            "text": "\u7528\u6237\u8f6c\u5316\u6f0f\u6597\uff08\u6d4f\u89c8\u2192\u8d2d\u4e70 67.6%\uff09",
             "target": "blank",
             "subtarget": "blank",
             "padding": 5,
@@ -135,7 +139,7 @@
         }
     ]
 };
-        chart_e53dfe94d4c04f58b95afb1a78379eec.setOption(option_e53dfe94d4c04f58b95afb1a78379eec);
+        chart_32542d5bc86945dead365318eccc12c4.setOption(option_32542d5bc86945dead365318eccc12c4);
     </script>
 </body>
 </html>

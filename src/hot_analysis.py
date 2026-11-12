@@ -1,5 +1,6 @@
 import pandas as pd
 from matplotlib import pyplot as plt
+from sqlalchemy import text
 
 from src.config import DA_CONFIG
 from utils import ConnectMysql
@@ -10,7 +11,10 @@ plt.rcParams["axes.unicode_minus"] = False
 
 def hot_analysis():
     engine = ConnectMysql().get_engine()
-    data = pd.read_sql("userbehavior", engine)
+    data = pd.read_sql(
+        text(f"SELECT product_id, category_id, behavior FROM {DA_CONFIG['table']}"),
+        engine,
+    )
     hot_pv = (
         data[data["behavior"] == "pv"]
         .groupby("product_id")

@@ -1,6 +1,7 @@
 import pandas as pd
 import seaborn as sns
 from matplotlib import pyplot as plt
+from sqlalchemy import text
 
 from src.config import DA_CONFIG
 from utils import ConnectMysql
@@ -11,8 +12,10 @@ plt.rcParams["axes.unicode_minus"] = False
 
 def basic_analysis():
     engine = ConnectMysql().get_engine()
-    data = pd.read_sql("userbehavior", engine)
-    data.info()
+    data = pd.read_sql(
+        text(f"SELECT behavior, date FROM {DA_CONFIG['table']}"), engine
+    )
+
     pv_data = data[data["behavior"] == "pv"]
     buy_data = data[data["behavior"] == "buy"]
     del data
